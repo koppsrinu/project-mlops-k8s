@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ml-infer-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ml-infer
+  template:
+    metadata:
+      labels:
+        app: ml-infer
+    spec:
+      containers:
+        - name: ml-infer
+          image: 084375576703.dkr.ecr.ap-south-1.amazonaws.com/ml-infer:latest
+          ports:
+            - containerPort: 8000
+

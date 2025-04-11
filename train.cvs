@@ -1,0 +1,21 @@
+import pandas as pd
+import xgboost as xgb
+from sklearn.model_selection import train_test_split
+from joblib import dump
+import os
+
+# Read data
+data = pd.read_csv("train.csv")
+
+# Split features & target
+X = data.drop("target", axis=1)
+y = data["target"]
+
+# Train XGBoost model
+model = xgb.XGBRegressor()
+model.fit(X, y)
+
+# Save the model
+os.makedirs("model", exist_ok=True)
+dump(model, "model/model.joblib")
+print("✅ Model trained and saved as model.joblib")
